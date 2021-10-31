@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "活動行事曆",
+    "description": "此擴充功能將頁面活動轉入Google Calendar行事曆上",
+    "version": "0.0.1",
+    "icons": {
+        "48": "images/48.png",
+        "128": "images/128.png"
+    },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2kWXlt37p1FHpbmZKOr4kDQ5p/5K8fpPYlMjyd8fmI7J0WnfX+t7X6vMEGMfC29Xl56x6tW4fCY2yUKDzuEzubOtLLZTCIlcdow0aQTDAOYTrOYdC8Z7krB1MJSyUaODdB5Mon9duee03rVeGN4tZO/WbvpzGNKJKWK5Ji1Yk8Flz6AUF1bJb0cqjMwerbtRXEqJhgBYY3wYEw+HF79DPMD9YoyJ2A5fBfYpXsu+eHMBDljZL+Y7ma5b4KjXvEMc5MEuKPzeMhbIltIVfL14Nix+tjhWW5iuSrfmkQ7BK2sXmXzqPT/rlhCXDeCa3sgMMrSV7GtI/RuT3D4PLFI9XQIDAQAB",
+    "permissions": ["tabs","https://*/", "http://*/",
+        "https://maps.google.com/*",
+        "https://maps.googleapis.com/*"],
+    "oauth2": {
+        "client_id": "573878889185-ehehmd5bjh62408al3a6mbeegtsp3rv5.apps.googleusercontent.com",
+        "scopes": [
+            "https://www.googleapis.com/auth/plus.login",
+            "https://www.googleapis.com/auth/userinfo.email"
+        ]
+    },
+    "page_action": {
+        "default_icon": {
+            "16": "images/16.png",
+            "24": "images/24.png",
+            "32": "images/32.png"
+        },
+        "default_popup": "popup.html",
+        "default_title": "紀錄活動至行事曆"
+    },
+    "background": {
+        "persistent": false,
+        "scripts": ["./js/background.js"]
+    },
+    "content_security_policy": "script-src 'self' https://maps.googleapis.com; object-src 'self'"
+}
