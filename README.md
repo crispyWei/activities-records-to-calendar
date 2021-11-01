@@ -7,9 +7,7 @@
 3. 易遊網
 4. 可樂旅遊
 
-###
-manifest.json需要新增key與client_id，請到以下網址進行申請
-<br/>
+### manifest.json需要新增key與client_id，請到以下網址進行申請
 <a href="https://console.cloud.google.com/apis/dashboard">Google Console platform</a>
 
 ### 載入畫面:
