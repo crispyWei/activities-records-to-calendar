@@ -3,9 +3,9 @@ var $divForms         = $('#div-forms');
 var $modalAnimateTime = 300;
 var $msgAnimateTime   = 150;
 var $msgShowTime      = 2000;
+var submitData        = {};
 
 function onPageDetailsReceived(pageDetails) {
-    console.log(pageDetails)
     if(typeof pageDetails.title == "undefined"){
         $("#content-title").text("頁面不支援活動行事曆");
         $("#content-detail").text("頁面不支援活動行事曆");
@@ -23,25 +23,13 @@ function onPageDetailsReceived(pageDetails) {
     }else{
         $("#content-title").text(pageDetails.title);
         $("#content-detail").text(pageDetails.url);
-        var getScheduleDate = moment(pageDetails.dateTime).format('YYYY-MM-DD hh:mm:ss A');
-        $("#content-dateTime").text(getScheduleDate);
+        var startScheduleDate = moment(pageDetails.startTime).format('YYYY-MM-DD hh:mm:ss A');
+        var endScheduleDate   = moment(pageDetails.endTime).format('YYYY-MM-DD hh:mm:ss A');
+        $("#content-dateTime").html(startScheduleDate +"<br/>"+endScheduleDate);
         $("#content-location").text(pageDetails.location);
-
-        //轉換地址到經緯度
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-            'address': pageDetails.location
-        }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                $('#Hidden1').val(results[0].geometry.location.lat()); //緯度
-                $('#Hidden2').val(results[0].geometry.location.lng()); //經度
-                $('#Hidden3').val(results[0].formatted_address); //地址
-                $('#Hidden4').val(results[0].place_id); //placeId
-            }
-        });
+        submitData = pageDetails;
     }
 }
-
 // When the popup HTML has loaded
 window.addEventListener('load', function(evt) {
     chrome.runtime.getBackgroundPage(function(eventPage) {
@@ -49,7 +37,52 @@ window.addEventListener('load', function(evt) {
     });
     // Get the event page
     $(document).ready(function() {
-    
+        $("#saveScheduleToCalendar").on('click', function() {
+            chrome.identity.getAuthToken({ 'interactive': true },
+            function(current_token) {
+                if (!chrome.runtime.lastError) {
+                    chrome.identity.removeCachedAuthToken({ token: current_token },
+                        function() {});
+                    var event = {
+                        summary: submitData["title"],
+                        description: submitData["location"],
+                        start: {
+                            'dateTime': moment(submitData["startTime"],'YYYY-MM-DD HH:mm').toDate()
+                        }
+                        ,
+                        end: {
+                            'dateTime':  moment(submitData["endTime"],'YYYY-MM-DD HH:mm').toDate()
+                        }
+                    };
+                    console.log(event);
+                    // return false;
+                    var fetch_options = {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${current_token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(event),
+                    };
+                    fetch(
+                        'https://www.googleapis.com/calendar/v3/calendars/primary/events',
+                        fetch_options
+                    )
+                    .then((response) => response.json())
+                    .then(function (data) {
+                        console.log(data);
+                        if(data["status"]=="confirmed"){
+                            window.close();
+                            alert("已成功匯入Google行事曆");
+                        }else{
+                            alert(data["error"]["message"]);
+                        }
+                    });
+                }else{
+                    alert("無法取得相關Google Calendar API");
+                }
+            });
+        });
     });
 });
 

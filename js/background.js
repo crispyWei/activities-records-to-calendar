@@ -26,7 +26,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo, tab) {
     chrome.tabs.get(activeInfo.tabId, function(tab){
        if (getDomainFromUrl(tab.url).toLowerCase() == "www.accupass.com" || getDomainFromUrl(tab.url).toLowerCase() == "www.ticket.com.tw" || getDomainFromUrl(tab.url).toLowerCase() == "member.eztravel.com.tw" || getDomainFromUrl(tab.url).toLowerCase() == "www.colatour.com.tw") {
             globalObj.url = getDomainFromUrl(tab.url).toLowerCase();
-            chrome.pageAction.show(tabId);
+            chrome.pageAction.show(tab.id);
         }
     });
 });

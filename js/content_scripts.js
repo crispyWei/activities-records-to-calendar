@@ -1,10 +1,11 @@
 switch (config.param1) {
     case "accupass": //accupass活動
-
-        var dateTime = "";
+        var startTime = "";
+        var endTime   = "";
         try{
             var dateTime = getUrlVars(document.getElementsByClassName("style-cc266487-calendar-link")[0].getAttribute("href"))['dates'];
-            dateTime     = decodeURIComponent(dateTime).split("/")[0];
+            startTime     = decodeURIComponent(dateTime).split("/")[0];
+            endTime       = decodeURIComponent(dateTime).split("/")[1];
         }catch (error){
         }
         var tagHref = document.getElementsByClassName("style-e6c7200c-event-detail-link");
@@ -18,7 +19,8 @@ switch (config.param1) {
         chrome.runtime.sendMessage({
             'title': document.getElementsByClassName("style-41874173-event-title")[0].innerText,
             'location': locationText,
-            'dateTime':dateTime,
+            'startTime':startTime,
+            'endTime':endTime,
             'url': window.location.href
         });
         break;
