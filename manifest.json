@@ -7,7 +7,7 @@
         "48": "images/48.png",
         "128": "images/128.png"
     },
-    "key": "",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2kWXlt37p1FHpbmZKOr4kDQ5p/5K8fpPYlMjyd8fmI7J0WnfX+t7X6vMEGMfC29Xl56x6tW4fCY2yUKDzuEzubOtLLZTCIlcdow0aQTDAOYTrOYdC8Z7krB1MJSyUaODdB5Mon9duee03rVeGN4tZO/WbvpzGNKJKWK5Ji1Yk8Flz6AUF1bJb0cqjMwerbtRXEqJhgBYY3wYEw+HF79DPMD9YoyJ2A5fBfYpXsu+eHMBDljZL+Y7ma5b4KjXvEMc5MEuKPzeMhbIltIVfL14Nix+tjhWW5iuSrfmkQ7BK2sXmXzqPT/rlhCXDeCa3sgMMrSV7GtI/RuT3D4PLFI9XQIDAQAB",
     "permissions": [
         "tabs",
         "https://*/", 
@@ -19,7 +19,7 @@
         "content_scripts"
     ],
     "oauth2": {
-        "client_id": "",
+        "client_id": "573878889185-ehehmd5bjh62408al3a6mbeegtsp3rv5.apps.googleusercontent.com",
         "scopes": [
             "profile email",
             "https://www.googleapis.com/auth/userinfo.email",

@@ -14,6 +14,6 @@
 <img src="/images/readme-1.png" alt="text" width="400"/>
 
 ### 擴充功能執行畫面:
-<img src="/images/readme-2.png" alt="text" width="250"/>
+<img src="/images/readme-2.png" alt="text" width="260"/>
 
 ---
